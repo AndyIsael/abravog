@@ -1,4 +1,4 @@
 <?php
 session_start();
 session_destroy();
-header('Location: /abravog/index.php');
+header('Location: ../index.php');

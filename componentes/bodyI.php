@@ -1,8 +1,7 @@
 <?php
 session_start();
-
-include("php/Empleado/ServicioEmpleado.php");
-$servicioEmpleado = new ServicioEmpleado();
+if (!isset($_SESSION['autenticado']))
+    $_SESSION['permisos'] = [];
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +15,7 @@ $servicioEmpleado = new ServicioEmpleado();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/main.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
@@ -31,6 +31,13 @@ $servicioEmpleado = new ServicioEmpleado();
         <?php if (isset($_SESSION['autenticado'])) { ?>
             <ul class="right hide-on-med-and-down">
                 <li><a href="php/cerrarSesion.php">Cerrar sesion</a></li>
+            </ul>
+        <?php } ?>
+
+
+        <?php if (in_array("ADMIN", $_SESSION['permisos'])) { ?>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="adminEmpleados.php">Administracion de empleados</a></li>
             </ul>
         <?php } ?>
 

@@ -62,38 +62,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col s12">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID Empleado</th>
-                        <th>Clave Empleado</th>
-                        <th>Nombre</th>
-                        <th>Edad</th>
-                        <th>Fecha de Nacimiento</th>
-                        <th>Género</th>
-                        <th>Sueldo Base</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach ($servicioEmpleado->obtenerEmpleados() as $empleado) { ?>
-                    <tr>
-                        <td><?php echo $empleado['id_empleado']?></td>
-                        <td><?php echo $empleado['clave_empleado']?></td>
-                        <td><?php echo $empleado['nombre']?></td>
-                        <td><?php echo $empleado['edad']?></td>
-                        <td><?php echo $empleado['fecha_nacimiento']?></td>
-                        <td><?php echo $empleado['genero']?></td>
-                        <td><?php echo $empleado['sueldo_base']?></td>
-                    </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
 </div>
 

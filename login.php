@@ -11,7 +11,7 @@ if (isset($_SESSION['autenticado'])) {
         <div class="col s3"></div>
         <div class="col s6 center">
             <div class="card grey darken-3 z-depth-5">
-                <form method="post" action="php/Usuario/EscucharUsuario.php">
+                <form method="post" action="php/EscucharUsuario.php">
                     <div class="card-content white-text">
                         <span class="card-title">Iniciar sesion</span>
                         <div class="row">
