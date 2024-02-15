@@ -5,3 +5,15 @@
 .margen-3 {
     margin: 3em;
 }
+
+.titulo {
+    font-weight: 600 !important;
+}
+
+.border-red {
+    border: 1px solid #ff5050;
+}
+
+.btn-large-red:hover {
+    background-color: #ff5050;
+}

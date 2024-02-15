@@ -4,9 +4,15 @@
 <script src="js/init.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems);
+        var options = {dismissible: false}
+        var instances = M.Modal.init(elems, options);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
     });
 </script>
 </body>
