@@ -70,12 +70,12 @@ $servicioEmpleado = new ServicioEmpleado();
                                             <i class="material-icons left">create</i>
                                         </button>
                                         <div id="modalEditar<?php echo $empleado['id_empleado'] ?>" class="modal" style="width: 100%; max-height: 100%; text-align: left !important;">
-                                            <form>
+                                            <form method="post" action="./php/EscucharEmpleado.php">
                                                 <div class="modal-content teal lighten-5">
                                                     <?php include './componentes/formularioEmpleados.php' ?>
                                                 </div>
                                                 <div class="modal-footer teal lighten-5" style="text-align: center !important; height: 100%;">
-                                                    <button type="submit" class="waves-effect waves-light btn-large" style="margin-right: 1em !important;">
+                                                    <button type="submit" name="actualizar" class="waves-effect waves-light btn-large" style="margin-right: 1em !important;">
                                                         Guardar
                                                     </button>
                                                     <a class="modal-close waves-effect waves-light btn-flat btn-large border-red btn-large-red" style="margin-left: 1em !important;">Cancelar</a>

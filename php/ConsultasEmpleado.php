@@ -2,7 +2,7 @@
 
 //include '../Conexion.php';
 //include 'php/Conexion.php';
-include 'Conexion.php';
+include_once 'Conexion.php';
 
 class ConsultasEmpleado
 {
@@ -19,7 +19,8 @@ class ConsultasEmpleado
                         g.genero,
                         e.sueldo_base,
                         ed.puesto,
-                        ed.experiencia_profesional
+                        ed.experiencia_profesional,
+                        e.id_genero
                     FROM
                         empleado AS e
                     JOIN empleados_detalle ed ON
@@ -54,6 +55,27 @@ class ConsultasEmpleado
             return $mysqli->affected_rows;
         } else {
             return 0;
+        }
+    }
+
+    public static function actualizarEmpleado($id, $clave, $nombre, $fcnacimiento, $genero, $sueldo)
+    {
+        $mysqli = Conexion::conexion();
+
+        $consulta = "UPDATE empleado AS e SET clave_empleado = ?, nombre = ?, fecha_nacimiento = ?, id_genero = ?, sueldo_base = ? WHERE e.id_empleado = ?";
+        if ($stmt = $mysqli->prepare($consulta)) {
+            // Vincular los parámetros
+            $stmt->bind_param('sssiii', $clave, $nombre, $fcnacimiento, $genero, $sueldo, $id);
+
+            // Ejecutar la declaración
+            if ($stmt->execute()) {
+                $stmt->close();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 }
