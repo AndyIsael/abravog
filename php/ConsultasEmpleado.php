@@ -14,7 +14,6 @@ class ConsultasEmpleado
                         e.id_empleado,
                         e.clave_empleado,
                         e.nombre,
-                        e.edad,
                         e.fecha_nacimiento,
                         g.genero,
                         e.sueldo_base,
@@ -32,6 +31,7 @@ class ConsultasEmpleado
         $datos = array();
         while ($registro = $query->fetch_assoc()) {
             $registro['fecha_nacimiento'] = FuncionesAyuda::convertirFechaDDMMYYYY($registro['fecha_nacimiento']);
+            $registro['edad'] = FuncionesAyuda::calcularEdad($registro['fecha_nacimiento']);
             $datos[] = $registro;
         }
 

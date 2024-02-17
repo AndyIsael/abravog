@@ -27,6 +27,7 @@
             <label for="genero">Selecciona un género <span style="color: red">*</span></label>
         </div>
         <div class="input-field col s6 l4">
+            <i class="material-icons prefix">attach_money</i>
             <input id="sueldo" type="number" class="validate" minlength="1" min="1" name="sueldo"
                    value="<?php if (isset($empleado)) echo $empleado['sueldo_base'] ?>" required>
             <label for="sueldo">Sueldo base $ <span style="color: red">*</span></label>

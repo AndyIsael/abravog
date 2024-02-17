@@ -6,6 +6,7 @@ if (!isset($_SESSION['autenticado']) && !in_array("ADMIN", $_SESSION['permisos']
 
 include("./php/ServicioEmpleado.php");
 $servicioEmpleado = new ServicioEmpleado();
+include_once './php/FuncionesAyuda.php';
 ?>
     <div class="card margen-card teal lighten-5 z-depth-3">
         <div class="card-content">
@@ -62,7 +63,7 @@ $servicioEmpleado = new ServicioEmpleado();
                                 <td><?php echo $empleado['edad'] ?></td>
                                 <td><?php echo $empleado['fecha_nacimiento'] ?></td>
                                 <td><?php echo $empleado['genero'] ?></td>
-                                <td><?php echo $empleado['sueldo_base'] ?></td>
+                                <td><?php echo FuncionesAyuda::convertirMoneda($empleado['sueldo_base']) ?></td>
                                 <td><?php echo $empleado['puesto'] ?></td>
                                 <td><?php echo $empleado['experiencia_profesional'] ?></td>
                                 <td>
