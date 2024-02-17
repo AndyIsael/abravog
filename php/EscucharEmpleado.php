@@ -19,5 +19,14 @@ if (isset($_GET['id'])) {
         $_POST['puesto'],
         $_POST['xprofecional']
     );
+} else if (isset($_POST['altaEmpleado'])) {
+    $servicioEmpleado->crearEmpleado($_POST['clave'],
+        $_POST['nombre'],
+        $_POST['fcnacimiento'],
+        $_POST['genero'],
+        $_POST['sueldo'],
+        $_POST['puesto'],
+        $_POST['xprofecional']
+    );
 }
 

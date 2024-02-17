@@ -1,5 +1,6 @@
 <div>
     <h4 class="titulo">Datos del empleado <span style="color: red">*</span></h4>
+    <hr>
     <div class="row">
         <input type="hidden" name="id" value="<?php if (isset($empleado)) echo $empleado['id_empleado']; ?>">
         <div class="input-field col s6 l4">
@@ -13,7 +14,7 @@
             <label for="nombre">Nombre del empleado <span style="color: red">*</span></label>
         </div>
         <div class="input-field col s6 l4">
-            <input id="fcnacimiento" type="text" class="validate" minlength="1" name="fcnacimiento"
+            <input id="fcnacimiento" type="text" class="datepicker validate" minlength="1" name="fcnacimiento"
                    value="<?php if (isset($empleado)) echo $empleado['fecha_nacimiento'] ?>" required>
             <label for="fcnacimiento">Fecha de nacimiento <span style="color: red">*</span></label>
         </div>
@@ -26,13 +27,14 @@
             <label for="genero">Selecciona un género <span style="color: red">*</span></label>
         </div>
         <div class="input-field col s6 l4">
-            <input id="sueldo" type="text" class="validate" minlength="1" name="sueldo"
+            <input id="sueldo" type="number" class="validate" minlength="1" min="1" name="sueldo"
                    value="<?php if (isset($empleado)) echo $empleado['sueldo_base'] ?>" required>
             <label for="sueldo">Sueldo base $ <span style="color: red">*</span></label>
         </div>
     </div>
 
     <h4 class="titulo">Detalle del empleado <span style="color: red">*</span></h4>
+    <hr>
     <div class="row">
         <div class="input-field col s6 l4">
             <input id="puesto" type="text" class="validate" minlength="1" name="puesto"

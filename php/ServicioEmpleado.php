@@ -2,6 +2,7 @@
 
 include_once 'ConsultasEmpleado.php';
 include_once 'ConsultasEmpleadoDetalle.php';
+include_once 'FuncionesAyuda.php';
 
 class ServicioEmpleado
 {
@@ -22,12 +23,30 @@ class ServicioEmpleado
         }
     }
 
+    public function crearEmpleado($clave, $nombre, $fcnacimiento, $genero, $sueldo, $puesto, $xprofecional)
+    {
+        $datosCompletos = $this->validarDatosActualizarEmpleado(0, $clave, $nombre, $fcnacimiento, $genero, $sueldo, 0, 0);
+
+        if (!$datosCompletos) {
+            return;
+        }
+
+        $idEmpleado = ConsultasEmpleado::crearEmpleado($clave, $nombre, FuncionesAyuda::convertirFechaYYYYMMDD($fcnacimiento), $genero, $sueldo);
+
+        if ($idEmpleado > 0) {
+            $respuesta = ConsultasEmpleadoDetalle::crearEmpleadoDetalle($idEmpleado, $puesto, $xprofecional);
+            if ($respuesta) {
+                header('Location: ../adminEmpleados.php');
+            }
+        }
+    }
+
     public function actualizarEmpleado($id, $clave, $nombre, $fcnacimiento, $genero, $sueldo, $puesto, $xprofecional)
     {
         $datosCompletos = $this->validarDatosActualizarEmpleado($id, $clave, $nombre, $fcnacimiento, $genero, $sueldo, $puesto, $xprofecional);
 
         if ($datosCompletos) {
-            $resultado = ConsultasEmpleado::actualizarEmpleado($id, $clave, $nombre, $fcnacimiento, $genero, $sueldo);
+            $resultado = ConsultasEmpleado::actualizarEmpleado($id, $clave, $nombre, FuncionesAyuda::convertirFechaYYYYMMDD($fcnacimiento), $genero, $sueldo);
             if ($resultado) {
                 $resultado2 = ConsultasEmpleadoDetalle::actualizarEmpleadoDetalle($id, $puesto, $xprofecional);
                 if ($resultado2) {

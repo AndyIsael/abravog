@@ -23,7 +23,7 @@ class ConsultasEmpleado
                         e.id_genero
                     FROM
                         empleado AS e
-                    JOIN empleados_detalle ed ON
+                    LEFT JOIN empleados_detalle ed ON
                         ed.id_empleado = e.id_empleado
                     JOIN genero g ON
                         g.id_genero = e.id_genero
@@ -31,6 +31,7 @@ class ConsultasEmpleado
         $query = $mysqli->query($consulta);
         $datos = array();
         while ($registro = $query->fetch_assoc()) {
+            $registro['fecha_nacimiento'] = FuncionesAyuda::convertirFechaDDMMYYYY($registro['fecha_nacimiento']);
             $datos[] = $registro;
         }
 
@@ -53,6 +54,28 @@ class ConsultasEmpleado
 
         if ($resultado) {
             return $mysqli->affected_rows;
+        } else {
+            return 0;
+        }
+    }
+
+    public static function crearEmpleado($clave, $nombre, $fcnacimiento, $genero, $sueldo)
+    {
+        $mysqli = Conexion::conexion();
+
+        $consulta = "INSERT INTO empleado (clave_empleado, nombre, fecha_nacimiento, id_genero, sueldo_base) VALUES (?, ?, ?, ?, ?)";
+
+        if ($stmt = $mysqli->prepare($consulta)) {
+
+            $stmt->bind_param('sssii', $clave, $nombre, $fcnacimiento, $genero, $sueldo);
+
+            if ($stmt->execute()) {
+                $idEmpleado = $mysqli->insert_id;
+                $stmt->close();
+                return $idEmpleado;
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }
