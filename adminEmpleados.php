@@ -1,6 +1,9 @@
 <?php include './componentes/bodyI.php' ?>
 <?php
-if (!isset($_SESSION['autenticado']) && !in_array("ADMIN", $_SESSION['permisos'])) {
+if (!isset($_SESSION['autenticado'])) {
+    header('Location: index.php');
+}
+if (!isset($_SESSION['permisos']) || !in_array("ADMIN_EMPLEADOS", $_SESSION['permisos'])) {
     header('Location: index.php');
 }
 
@@ -14,10 +17,13 @@ include_once './php/FuncionesAyuda.php';
                 <div class="row">
                     <div class="col s10"><b>Administracion de empleados</b></div>
                     <div class="col s2">
-                        <button data-target="formularioEmpleados" class="btn waves-effect waves-light modal-trigger">
-                            Crear empleado
-                            <i class="material-icons left">add</i>
-                        </button>
+                        <?php if (in_array("ADMIN_EMPLEADOS_CREAR", $_SESSION['permisos'])) { ?>
+                            <button data-target="formularioEmpleados"
+                                    class="btn waves-effect waves-light modal-trigger">
+                                Crear empleado
+                                <i class="material-icons left">add</i>
+                            </button>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -67,11 +73,13 @@ include_once './php/FuncionesAyuda.php';
                                 <td><?php echo $empleado['puesto'] ?></td>
                                 <td><?php echo $empleado['experiencia_profesional'] ?></td>
                                 <td>
-                                    <button data-target="modalEditar<?php echo $empleado['id_empleado'] ?>"
-                                            class="btn-floating btn-small waves-effect waves-light yellow darken-2 modal-trigger"
-                                            title="Editar empleado">
-                                        <i class="material-icons left">create</i>
-                                    </button>
+                                    <?php if (in_array("ADMIN_EMPLEADOS_EDITAR", $_SESSION['permisos'])) { ?>
+                                        <button data-target="modalEditar<?php echo $empleado['id_empleado'] ?>"
+                                                class="btn-floating btn-small waves-effect waves-light yellow darken-2 modal-trigger"
+                                                title="Editar empleado">
+                                            <i class="material-icons left">create</i>
+                                        </button>
+                                    <?php } ?>
                                     <div id="modalEditar<?php echo $empleado['id_empleado'] ?>" class="modal"
                                          style="width: 100%; max-height: 100%; text-align: left !important;">
                                         <form method="post" action="./php/EscucharEmpleado.php">
@@ -91,12 +99,13 @@ include_once './php/FuncionesAyuda.php';
                                         </form>
                                     </div>
                                     <!--ELIMINAR EMPLEADO-->
-                                    <button data-target="modal<?php echo $empleado['id_empleado'] ?>"
-                                            class="btn-floating btn-small waves-effect waves-light red modal-trigger"
-                                            title="Eliminar empleado">
-                                        <i class="material-icons left">delete</i>
-                                    </button>
-
+                                    <?php if (in_array("ADMIN_EMPLEADOS_ELIMINAR", $_SESSION['permisos'])) { ?>
+                                        <button data-target="modal<?php echo $empleado['id_empleado'] ?>"
+                                                class="btn-floating btn-small waves-effect waves-light red modal-trigger"
+                                                title="Eliminar empleado">
+                                            <i class="material-icons left">delete</i>
+                                        </button>
+                                    <?php } ?>
                                     <div id="modal<?php echo $empleado['id_empleado'] ?>" class="modal center">
                                         <div class="modal-content">
                                             <h4>¿Está seguro de eliminar a <b><?php echo $empleado['nombre'] ?></b>?

@@ -35,14 +35,31 @@ if (!isset($_SESSION['autenticado']))
         <?php } ?>
 
 
-        <?php if (in_array("ADMIN", $_SESSION['permisos'])) { ?>
+        <?php if (isset($_SESSION['permisos']) && in_array("ADMIN_EMPLEADOS", $_SESSION['permisos'])) { ?>
             <ul class="right hide-on-med-and-down">
                 <li><a href="adminEmpleados.php">Administracion de empleados</a></li>
             </ul>
         <?php } ?>
 
+        <?php if (isset($_SESSION['permisos']) && in_array("ADMIN_PERMISOS_USUARIO", $_SESSION['permisos'])) { ?>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="adminPermisosUsuario.php">Administracion de permisos de usuario</a></li>
+            </ul>
+        <?php } ?>
+
         <ul id="nav-mobile" class="sidenav">
-            <li><a href="#">Navbar Link</a></li>
+            <?php if (!isset($_SESSION['autenticado'])) { ?>
+                <li><a href="login.php">Iniciar sesion</a></li>
+            <?php } ?>
+            <?php if (isset($_SESSION['autenticado'])) { ?>
+                <li><a href="php/cerrarSesion.php">Cerrar sesion</a></li>
+            <?php } ?>
+            <?php if (isset($_SESSION['permisos']) && in_array("ADMIN_EMPLEADOS", $_SESSION['permisos'])) { ?>
+                <li><a href="adminEmpleados.php">Admin. de empleados</a></li>
+            <?php } ?>
+            <?php if (isset($_SESSION['permisos']) && in_array("ADMIN_PERMISOS_USUARIO", $_SESSION['permisos'])) { ?>
+                <li><a href="adminPermisosUsuario.php">Admin. permisos de usuario</a></li>
+            <?php } ?>
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>

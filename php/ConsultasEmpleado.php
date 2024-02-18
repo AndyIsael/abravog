@@ -87,10 +87,8 @@ class ConsultasEmpleado
 
         $consulta = "UPDATE empleado AS e SET clave_empleado = ?, nombre = ?, fecha_nacimiento = ?, id_genero = ?, sueldo_base = ? WHERE e.id_empleado = ?";
         if ($stmt = $mysqli->prepare($consulta)) {
-            // Vincular los parámetros
             $stmt->bind_param('sssiii', $clave, $nombre, $fcnacimiento, $genero, $sueldo, $id);
 
-            // Ejecutar la declaración
             if ($stmt->execute()) {
                 $stmt->close();
                 return true;

@@ -1,5 +1,3 @@
-
-
 <?php include 'componentes/bodyI.php' ?>
 
 <div id="index-banner" class="parallax-container">
