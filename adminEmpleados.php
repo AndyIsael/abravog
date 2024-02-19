@@ -10,6 +10,7 @@ if (!isset($_SESSION['permisos']) || !in_array("ADMIN_EMPLEADOS", $_SESSION['per
 include("./php/ServicioEmpleado.php");
 $servicioEmpleado = new ServicioEmpleado();
 include_once './php/FuncionesAyuda.php';
+include_once './php/ServicioExterno.php';
 ?>
     <div class="card margen-card teal lighten-5 z-depth-3">
         <div class="card-content">
@@ -54,7 +55,8 @@ include_once './php/FuncionesAyuda.php';
                             <th>Edad</th>
                             <th>Fecha de Nacimiento</th>
                             <th>Género</th>
-                            <th>Sueldo Base</th>
+                            <th>Sueldo Base (MXN)</th>
+                            <th>Sueldo Base (USD)</th>
                             <th>Puesto</th>
                             <th>Experiencia Profesional</th>
                             <th>Acciones</th>
@@ -62,6 +64,7 @@ include_once './php/FuncionesAyuda.php';
                         </thead>
                         <tbody>
                         <?php
+                        $resultadoDolar = ServicioExterno::obtenerTipoCambioPesosporDolar();
                         foreach ($servicioEmpleado->obtenerEmpleados() as $empleado) { ?>
                             <tr>
                                 <td><?php echo $empleado['clave_empleado'] ?></td>
@@ -70,6 +73,7 @@ include_once './php/FuncionesAyuda.php';
                                 <td><?php echo $empleado['fecha_nacimiento'] ?></td>
                                 <td><?php echo $empleado['genero'] ?></td>
                                 <td><?php echo FuncionesAyuda::convertirMoneda($empleado['sueldo_base']) ?></td>
+                                <td><?php echo FuncionesAyuda::convertirPesoADolar($empleado['sueldo_base'], $resultadoDolar) ?></td>
                                 <td><?php echo $empleado['puesto'] ?></td>
                                 <td><?php echo $empleado['experiencia_profesional'] ?></td>
                                 <td>

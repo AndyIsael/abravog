@@ -1,5 +1,7 @@
 <?php
 
+include_once "ServicioExterno.php";
+
 class FuncionesAyuda
 {
     public static function convertirFechaDDMMYYYY($fecha)
@@ -26,5 +28,16 @@ class FuncionesAyuda
     {
         $numeroFormatoMoneda = number_format($numero, 2, '.', ',');
         return "$" . $numeroFormatoMoneda;
+    }
+
+    public static function convertirPesoADolar($peso, $dolar)
+    {
+        if (empty($dolar)) {
+            return 'N/A';
+        } else {
+            $dolarConvertido = $peso / $dolar;
+            $dolarConvertidoFormateado = number_format($dolarConvertido, 2, '.', ',');
+            return '$' . $dolarConvertidoFormateado;
+        }
     }
 }
